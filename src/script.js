@@ -123,13 +123,21 @@ scene.add(house);
 
 /**
  * Windmill
+ * 
  */
+
+const bodyT = textureLoader.load("./textures/rockConcreteWall/rock_embedded_concrete_wall_diff_1k.jpg")
+const bodyAO = textureLoader.load("./textures/rockConcreteWall/rock_embedded_concrete_wall_disp_1k.png")
+const bodyNor = textureLoader.load("./textures/rockConcreteWall/rock_embedded_concrete_wall_nor_gl_1k.exr")
+const bodyRough = textureLoader.load("./textures/rockConcreteWall/rock_embedded_concrete_wall_rough_1k.exr")
+
+bodyT.colorSpace = THREE.SRGBColorSpace
 const windmill = new THREE.Group();
 
 // Body
 const body = new THREE.Mesh(
   new THREE.ConeGeometry(2, 10, 4),
-  new THREE.MeshStandardMaterial({ color: "grey" })
+  new THREE.MeshStandardMaterial({ map: bodyT, aoMap: bodyAO, normalMap:bodyNor, roughnessMap: bodyRough})
 );
 body.position.set(-7, 5, -5);
 
@@ -222,6 +230,21 @@ scene.add(
 );
 
 /**
+ road
+ */
+
+ const wheel = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.5,0.5,0.7,8),
+  new THREE.MeshStandardMaterial({color: "red"})
+ )
+
+ scene.add(wheel)
+
+//  ///////////////////////////////////////////////////////
+
+
+
+/**
  * Floor
  */
 const floorAlphaTexture = textureLoader.load("./textures/floor/alpha.jpg");
@@ -308,7 +331,7 @@ scene.add(camera);
 // Controls
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
-
+// 
 /**
  * Renderer
  */
